@@ -1,0 +1,40 @@
+{
+  "name": "hepl-tech-lab",
+  "version": "1.0.0",
+  "description": "Site web moderne pour HEPL Tech Lab - Club Informatique HEPL",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server . -p 8080",
+    "dev": "live-server --port=3000",
+    "build": "echo 'Build completed - Static files ready for deployment'",
+    "lint": "echo 'No linting configured yet'",
+    "test": "echo 'No tests configured yet'"
+  },
+  "keywords": [
+    "club-informatique",
+    "HEPL",
+    "tech-lab",
+    "website",
+    "frontend",
+    "javascript",
+    "html",
+    "css",
+    "tailwind"
+  ],
+  "author": "HEPL Tech Lab",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hepl-tech-lab/website.git"
+  },
+  "homepage": "https://hepl-tech-lab.github.io/website/",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

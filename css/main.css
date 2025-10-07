@@ -1,0 +1,486 @@
+/* HEPL Tech Lab - Main Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+* {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f9fafb;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   Loading Styles
+   ========================================================================== */
+
+.hero-loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   Hero Section Styles
+   ========================================================================== */
+
+.hero-image {
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .hero-image {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-image {
+        max-width: 280px;
+    }
+}
+
+/* Hide navigation on small screens/tablets so the hero title is visible */
+@media (max-width: 768px) {
+    /* Force-hide navigation on small screens (covering cases where inline styles or scripts may re-show it) */
+    nav {
+        display: none !important;
+        transform: translateY(-120%) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+}
+
+/* ==========================================================================
+   Keyframe Animations
+   ========================================================================== */
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(59, 130, 246, 0.6);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-10deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes neonGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+    50% {
+        text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   Animation Classes
+   ========================================================================== */
+
+.fade-in-up {
+    animation: fadeInUp 1s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+.bounce-in {
+    animation: bounceIn 1s ease-out;
+}
+
+.float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.pulse-hover:hover {
+    animation: pulse 0.8s ease-in-out;
+}
+
+.glow-effect {
+    animation: glow 3s ease-in-out infinite;
+}
+
+.neon-text {
+    animation: neonGlow 2s ease-in-out infinite alternate;
+}
+
+/* ==========================================================================
+   Background Gradients
+   ========================================================================== */
+
+.gradient-bg {
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+
+.modern-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    background-size: 300% 300%;
+    animation: gradientMove 10s ease infinite;
+}
+
+/* ==========================================================================
+   Interactive Elements
+   ========================================================================== */
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.card-hover:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.button-3d {
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+}
+
+.button-3d:hover {
+    transform: rotateX(15deg) rotateY(15deg) translateZ(10px);
+}
+
+.text-gradient {
+    background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.morphing-card {
+    border-radius: 30px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+    transition: all 0.3s ease;
+}
+
+.morphing-card:hover {
+    border-radius: 50px;
+    box-shadow: 30px 30px 80px #d9d9d9, -30px -30px 80px #ffffff;
+}
+
+.parallax-element {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+.skill-bar {
+    height: 8px;
+    background: linear-gradient(90deg, #00f2fe, #4facfe);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.interactive-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.interactive-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+    animation: rotate360 20s linear infinite;
+}
+
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+    filter: brightness(1.1);
+}
+
+/* ==========================================================================
+   Performance Optimizations
+   ========================================================================== */
+
+.will-change-transform {
+    will-change: transform;
+}
+
+.will-change-opacity {
+    will-change: opacity;
+}
+
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+    }
+    
+    .float {
+        animation-duration: 3s;
+    }
+    
+    .button-3d:hover {
+        transform: none;
+    }
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+/* Footer tweaks: center columns and restyle links */
+footer .max-w-7xl .grid {
+    justify-items: center; /* center each grid cell horizontally */
+    text-align: center;    /* center text inside each cell */
+}
+
+footer .max-w-7xl .grid ul {
+    padding-left: 0; /* remove left padding for lists in footer */
+    margin: 0;
+}
+
+footer .max-w-7xl .grid ul li {
+    list-style-position: inside;
+    margin: 6px 0;
+}
+
+/* Link colors in footer (harmonized with site accent) */
+footer a {
+    color: #60a5fa; /* soft blue */
+    transition: color .18s ease, transform .18s ease;
+}
+
+footer a:hover,
+footer a:focus {
+    color: #3b82f6; /* stronger blue on hover */
+    transform: translateX(2px);
+    text-decoration: none;
+}
+
+
+.loaded {
+    opacity: 1;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
+   Mobile-specific hero/header fixes (improve initial viewport on small devices)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    /* Reduce hero title size and spacing for mobile */
+    .hero-loading { margin-bottom: 1rem; height: 1vh; }
+    .gradient-bg .text-5xl, .text-5xl { font-size: 2rem; }
+    .text-7xl { font-size: 2.5rem; }
+
+    /* Ensure the header/nav doesn't overlap the hero */
+    nav { display: none; }
+    nav .flex { align-items: center; }
+
+    /* Buttons are full width and stacked */
+    .hero-image { max-width: 100%; height: auto; }
+    .slide-in-right, .slide-in-left { visibility: visible; }
+    .modern-gradient, .glass-effect { width: 100%; display: block; }
+    .flex.flex-col.sm\:flex-row { flex-direction: column; }
+
+    /* Reduce paddings around hero content */
+    .max-w-7xl { padding-left: 1rem; padding-right: 1rem; }
+    .py-20 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+
+    /* Make CTA buttons more tappable */
+    .modern-gradient, .glass-effect { padding-left: 1rem; padding-right: 1rem; padding-top: 0.8rem; padding-bottom: 0.8rem; font-size: 1rem; }
+
+    /* Prevent hero image from pushing content too far down */
+    .hero-image { margin: 0 auto; display: block; }
+
+    /* Slightly smaller logo and fewer floating elements */
+    .flex.items-center.space-x-2 .fas { font-size: 1.5rem; }
+
+    /* Ensure loader is not 100vh to avoid large empty area on mobile chrome UI */
+    #performance-loader.hero-loading { height: 40vh; }
+}

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="HEPL Tech Lab - Club d'informatique innovant. Développement d'applications, IA, cybersécurité et réseaux. Rejoignez notre communauté passionnée !">
+    <meta name="keywords"
+        content="HEPL, Tech Lab, informatique, développement, IA, cybersécurité, réseaux, club étudiant">
+    <meta name="author" content="HEPL Tech Lab">
+    <meta name="robots" content="index, follow">
+
+    <!-- Optimisation de performance -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <!-- Meta pour réseaux sociaux -->
+    <meta property="og:title" content="HEPL Tech Lab - Innovation & Créativité">
+    <meta property="og:description" content="Club d'informatique innovant. Développement, IA, cybersécurité et plus !">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hepltechlab.be">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>HEPL Tech Lab - Innovation & Créativité</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Critical CSS inline -->
+    <style>
+        /* Critical path CSS - chargement immédiat */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f9fafb;
+        }
+
+        .hero-loading {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Enable smooth scrolling for browsers that support it */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    <script>
+        // Préchargement des ressources critiques
+        const preloadResources = [
+            { href: 'css/main.css', as: 'style' },
+            { href: 'js/script.js', as: 'script' }
+        ];
+
+        preloadResources.forEach(resource => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = resource.href;
+            link.as = resource.as;
+            document.head.appendChild(link);
+        });
+    </script>
+    <link href="css/tailwind.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    </noscript>
+    <script>
+        // Force-hide nav on small screens early (inline) to prevent visual overlap on mobile
+        (function () {
+            function hideNavIfMobile() {
+                try {
+                    const nav = document.querySelector('nav');
+                    if (!nav) return;
+                    if (window.innerWidth <= 768) {
+                        nav.style.setProperty('display', 'none', 'important');
+                        nav.style.setProperty('transform', 'translateY(-120%)', 'important');
+                        nav.style.setProperty('opacity', '0', 'important');
+                        nav.style.setProperty('pointer-events', 'none', 'important');
+                        nav.style.setProperty('height', '0', 'important');
+                        nav.style.setProperty('overflow', 'hidden', 'important');
+                    } else {
+                        // restore default for larger screens
+                        nav.style.removeProperty('display');
+                        nav.style.removeProperty('transform');
+                        nav.style.removeProperty('opacity');
+                        nav.style.removeProperty('pointer-events');
+                        nav.style.removeProperty('height');
+                        nav.style.removeProperty('overflow');
+                    }
+                } catch (e) {/* ignore */ }
+            }
+            hideNavIfMobile();
+            window.addEventListener('resize', hideNavIfMobile);
+            // also try shortly after load in case nav is added later
+            window.addEventListener('load', hideNavIfMobile);
+        })();
+    </script>
+        <!-- EmailJS SDK (client-side email sending) -->
+        <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Loader de performance -->
+    <div id="performance-loader" class="hero-loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Contenu principal caché pendant le chargement -->
+    <div id="main-content" style="display: none;">
+
+        <!-- Navigation -->
+        <nav class="glass-effect fixed w-full z-50 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center space-x-2 slide-in-left">
+                        <i class="fas fa-code text-3xl text-blue-600 glow-effect"></i>
+                        <span class="text-2xl font-bold text-blue-600">HEPL Tech Lab</span>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#accueil"
+                            class="text-gray-700 hover:text-blue-600 transition duration-300 hover-lift">Accueil</a>
+                        <a href="#activites"
+                            class="text-gray-700 hover:text-blue-600 transition duration-300 hover-lift">Activités</a>
+                        <a href="#projets"
+                            class="text-gray-700 hover:text-blue-600 transition duration-300 hover-lift">Projets</a>
+                        <a href="#equipe"
+                            class="text-gray-700 hover:text-blue-600 transition duration-300 hover-lift">Équipe</a>
+                        <a href="#contact"
+                            class="text-gray-700 hover:text-blue-600 transition duration-300 hover-lift">Contact</a>
+                    </div>
+                    <a href="https://discord.gg/9Qc56d7b" target="_blank"
+                        class="modern-gradient text-white px-6 py-2 rounded-full hover:scale-105 transition duration-300 pulse-hover button-3d inline-flex items-center">
+                        <i class="fab fa-discord mr-2"></i>
+                        Nous rejoindre
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="accueil"
+            class="gradient-bg min-h-screen flex items-center relative overflow-hidden interactive-bg">
+            <div class="absolute inset-0 bg-black opacity-30"></div>
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-white fade-in-up">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                            Bienvenue au
+                            <span class="text-yellow-300 font-extrabold">HEPL Tech Lab</span>
+                        </h1>
+                        <p class="text-xl mb-8 leading-relaxed slide-in-left">
+                            Rejoignez notre communauté passionnée d'étudiants innovateurs.
+                            Créez des applications, développez vos compétences en IA et explorez les dernières
+                            technologies.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 slide-in-right">
+                            <a href="https://discord.gg/9Qc56d7b" target="_blank"
+                                class="modern-gradient text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition duration-300 pulse-hover button-3d glow-effect inline-flex items-center">
+                                <i class="fab fa-discord mr-2"></i>
+                                Commencer l'aventure
+                            </a>
+                            <a href="#projets"
+                                class="glass-effect border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-gray-800 transition duration-300 hover-lift inline-flex items-center">
+                                <i class="fas fa-play mr-2"></i>
+                                Voir nos projets
+                            </a>
+                        </div>
+                    </div>
+                    <div class="float gpu-accelerated">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Étudiants travaillant sur des projets informatiques"
+                            class="hero-image rounded-lg shadow-2xl morphing-card hover-lift will-change-transform"
+                            loading="eager" decoding="async" width="600" height="450">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating elements -->
+            <div class="absolute top-20 left-10 text-white opacity-30">
+                <i class="fas fa-code text-6xl float neon-text"></i>
+            </div>
+            <div class="absolute bottom-20 right-10 text-white opacity-30">
+                <i class="fas fa-laptop-code text-6xl float neon-text" style="animation-delay: 1s;"></i>
+            </div>
+            <div class="absolute top-1/2 right-20 text-white opacity-20">
+                <i class="fas fa-brain text-4xl float" style="animation-delay: 2s;"></i>
+            </div>
+            <div class="absolute bottom-1/3 left-20 text-white opacity-20">
+                <i class="fas fa-shield-alt text-5xl float" style="animation-delay: 1.5s;"></i>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="py-16 modern-gradient relative">
+            <div class="absolute inset-0 bg-white opacity-90"></div>
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    <div class="morphing-card card-hover p-8 hover-lift will-change-transform">
+                        <div class="text-5xl font-bold text-blue-600 mb-4 neon-text" id="members-count">0</div>
+                        <div class="skill-bar mb-2"></div>
+                        <p class="text-gray-600 font-medium">Membres actifs</p>
+                    </div>
+                    <div class="morphing-card card-hover p-8 hover-lift will-change-transform">
+                        <div class="text-5xl font-bold text-green-600 mb-4 neon-text" id="projects-count">0</div>
+                        <div class="skill-bar mb-2"></div>
+                        <p class="text-gray-600 font-medium">Projets réalisés</p>
+                    </div>
+                    <div class="morphing-card card-hover p-8 hover-lift will-change-transform">
+                        <div class="text-5xl font-bold text-purple-600 mb-4 neon-text" id="events-count">0</div>
+                        <div class="skill-bar mb-2"></div>
+                        <p class="text-gray-600 font-medium">Événements organisés</p>
+                    </div>
+                    <div class="morphing-card card-hover p-8 hover-lift will-change-transform">
+                        <div class="text-5xl font-bold text-red-600 mb-4 neon-text" id="awards-count">0</div>
+                        <div class="skill-bar mb-2"></div>
+                        <p class="text-gray-600 font-medium">Récompenses obtenues</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities Section -->
+        <section id="activites" class="py-20 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Nos Activités</h2>
+                    <p class="text-xl text-gray-600">Découvrez toutes les activités passionnantes que nous proposons</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Développement d'applications" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-mobile-alt text-2xl text-blue-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Développement d'Applications</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Créez des applications mobiles et web innovantes avec les dernières technologies.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Node.js</span>
+                                <span
+                                    class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Flutter</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Secteur industriel et automatisation" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-industry text-2xl text-purple-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Industriel</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Projets industriels : automatisation, IoT industriel et contrôle-commande.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">IoT</span>
+                                <span
+                                    class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Automatisation</span>
+                                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">PLC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Réseaux et Cybersécurité" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-shield-alt text-2xl text-green-600 mr-3"></i>
+                                <h3 class="text-xl font-bold">Réseaux & Cybersécurité</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">
+                                Maîtrisez la sécurité informatique et l'administration des réseaux.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">Linux</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Ethical
+                                    Hacking</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Cisco</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projets" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Projets en cours</h2>
+                    <p class="text-xl text-gray-600">Projets en cours — rejoignez-nous pour participer à leur
+                        réalisation !</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg p-6 text-white card-hover">
+                        <i class="fas fa-tachometer-alt text-3xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Dashboard de Suivi</h3>
+                        <p class="mb-4">Création d'un dashboard pour suivre l'avancement des projets, visualisation des
+                            tâches et KPI.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm opacity-75">React • Node.js • Firebase</span>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-lg p-6 text-white card-hover">
+                        <i class="fas fa-seedling text-3xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">prorSys.aros</h3>
+                        <p class="mb-4">Système d'arrosage automatisé (IoT) pour jardins et espaces verts. Capteurs,
+                            contrôle et planification.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm opacity-75">Arduino • IoT • Sensors</span>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-red-500 to-pink-600 rounded-lg p-6 text-white card-hover">
+                        <i class="fas fa-shield-alt text-3xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Error404 (Équipe CTF)</h3>
+                        <p class="mb-4">Équipe CTF dédiée aux compétitions de cybersécurité : challenges, entraînements
+                            et compétitions.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm opacity-75">Security • CTF • Linux</span>
+                        </div>
+                    </div>
+
+                    <!-- Removed old project entries to keep only current projects -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="equipe" class="py-20 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Notre Équipe</h2>
+                    <p class="text-xl text-gray-600">Rencontrez les passionnés qui dirigent le club</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <div
+                            class="w-full h-64 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-user-tie text-6xl text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">Jérôme Focant</h3>
+                            <p class="text-blue-600 mb-3">Étudiant · Réseaux &amp; Télécommunications (Bloc 3)</p>
+                            <p class="text-gray-600 text-sm mb-4">Étudiant en Réseaux et Télécommunications (Bloc 3) à
+                                la HEPL. Passionné par l'administration réseau, la virtualisation et la configuration
+                                d'équipements.</p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="discord://-/users/334766673275912193"
+                                    onclick="setTimeout(()=>{window.open('https://discord.com/users/334766673275912193','_blank')},500)"
+                                    rel="noopener noreferrer" aria-label="Discord Jérôme Focant"
+                                    class="text-gray-800 hover:scale-110 transition-transform cursor-pointer flex items-center justify-center">
+                                    <i class="fab fa-discord text-2xl"></i>
+                                    <span class="ml-2 align-middle"></span>
+                                </a>
+                                <a href="mailto:jerome.focant@student.hepl.be" aria-label="Email Jérôme Focant"
+                                    class="text-gray-800 hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fas fa-envelope text-2xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <div
+                            class="w-full h-64 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                            <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-user-graduate text-6xl text-purple-600"></i>
+                            </div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">Noa Lamalle</h3>
+                            <p class="text-purple-600 mb-3">Étudiant·e · Réseaux &amp; Télécommunications (Bloc 3)</p>
+                            <p class="text-gray-600 text-sm mb-4">Étudiant·e en Réseaux et Télécommunications (Bloc 3) à
+                                la HEPL. Centré·e sur la cybersécurité, la supervision des infrastructures et le
+                                mentorat.</p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="discord://-/users/455240906942054406"
+                                    onclick="setTimeout(()=>{window.open('https://discord.com/users/455240906942054406','_blank')},500)"
+                                    rel="noopener noreferrer" aria-label="Discord Noa Lamalle"
+                                    class="text-gray-800 hover:scale-110 transition-transform cursor-pointer flex items-center">
+                                    <i class="fab fa-discord text-2xl"></i>
+                                    <span class="ml-2"></span>
+                                </a>
+                                <a href="mailto:noa.lamalle@student.hepl.be" aria-label="Email Noa Lamalle"
+                                    class="text-gray-800 hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fas fa-envelope text-2xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <div
+                            class="w-full h-64 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                            <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-user-cog text-6xl text-green-600"></i>
+                            </div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">Axel Steveart</h3>
+                            <p class="text-green-600 mb-3">Étudiant · industriel (Bloc 3)</p>
+                            <p class="text-gray-600 text-sm mb-4">Étudiant en Réseaux et Télécommunications (Bloc 3) à
+                                la HEPL. Passionné par l'administration système, le dépannage réseau et l'automatisation
+                                des tâches.</p>
+                            <div class="flex justify-center space-x-3">
+                                <a href="discord://-/users/1176890608321839185"
+                                    onclick="setTimeout(()=>{window.open('https://discord.com/users/1176890608321839185','_blank')},500)"
+                                    rel="noopener noreferrer" aria-label="Discord Axel Steveart"
+                                    class="text-gray-800 hover:scale-110 transition-transform cursor-pointer flex items-center">
+                                    <i class="fab fa-discord text-2xl"></i>
+                                    <span class="ml-2"></span>
+                                </a>
+                                <a href="mailto:axel.steveart@student.hepl.be" aria-label="Email Axel Steveart"
+                                    class="text-gray-800 hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fas fa-envelope text-2xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 gradient-bg relative interactive-bg">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                <h2 class="text-5xl font-bold text-white mb-6 neon-text bounce-in">Prêt à nous rejoindre ?</h2>
+                <p class="text-xl text-white mb-8 leading-relaxed slide-in-left">
+                    Rejoignez une communauté dynamique d'étudiants passionnés.
+                    Développez vos compétences, créez des projets innovants et construisez votre avenir dans la tech !
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center slide-in-right">
+                    <a href="dashboard/index.php"
+                        class="modern-gradient text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition duration-300 pulse-hover button-3d glow-effect inline-flex items-center justify-center">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Inscription gratuite
+                    </a>
+                    <button
+                        class="glass-effect border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-gray-800 transition duration-300 hover-lift">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        En savoir plus
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Contactez-nous</h2>
+                    <p class="text-xl text-gray-600">Une question ? N'hésitez pas à nous contacter !</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <div class="space-y-8">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-blue-100 p-3 rounded-full">
+                                    <i class="fas fa-map-marker-alt text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-800">Adresse</h3>
+                                    <p class="text-gray-600">Rue Peetermans 80
+                                        4100 Seraing, HEPL Campus</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-green-100 p-3 rounded-full">
+                                    <i class="fas fa-phone text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-800">Téléphone</h3>
+                                    <p class="text-gray-600">04 279 55 20</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-purple-100 p-3 rounded-full">
+                                    <i class="fas fa-envelope text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-800">Email</h3>
+                                    <p class="text-gray-600">jerome.focant@student.hepl.be</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <form id="contact-form">
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <input name="name" id="contact-name" type="text" placeholder="Votre nom"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none transition duration-300" required>
+                                <input name="email" id="contact-email" type="email" placeholder="Votre email"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none transition duration-300" required>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <input name="subject" id="contact-subject" type="text" placeholder="Sujet"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none transition duration-300">
+                                <input name="phone" id="contact-phone" type="tel" placeholder="Téléphone (optionnel)"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none transition duration-300">
+                            </div>
+                            <textarea name="message" id="contact-message" placeholder="Votre message" rows="5"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none transition duration-300 mb-4"></textarea>
+                            <button id="contact-submit" type="submit"
+                                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 pulse-hover">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Envoyer le message
+                            </button>
+                            <div id="contact-status" role="status" aria-live="polite" class="mt-4 text-center text-sm"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <i class="fas fa-code text-2xl text-blue-400"></i>
+                            <span class="text-xl font-bold">HEPL Tech Lab</span>
+                        </div>
+                        <p class="text-gray-400 leading-relaxed">
+                            Le laboratoire technologique de la HEPL.
+                            Innovation, créativité et passion pour la technologie.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold mb-4">Liens rapides</h3>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#accueil" class="hover:text-white transition duration-300">Accueil</a></li>
+                            <li><a href="#activites" class="hover:text-white transition duration-300">Activités</a></li>
+                            <li><a href="#projets" class="hover:text-white transition duration-300">Projets</a></li>
+                            <li><a href="#equipe" class="hover:text-white transition duration-300">Équipe</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold mb-4">Activités</h3>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>Développement Web</li>
+                            <li>Industriel</li>
+                            <li>Cybersécurité</li>
+                            <li>Réseaux informatiques</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 HEPL Tech Lab. Tous droits réservés. Fait avec ❤️ par les étudiants pour les
+                        étudiants.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!-- Fin du contenu principal -->
+
+    <script src="js/contact.js" defer></script>
+    <script src="js/script.js" defer></script>
+</body>
+
+</html>
